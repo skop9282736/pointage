@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{%load static %}
+{% block title %} Gerer les employes {% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-12 card">
+				<h3>gestion des employés</h3>
+				<hr>
+			<div class="card-body" id="emp_list">
+				<div class="form-group">
+					<button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-center1"><i class="fa fa-user-plus"></i> Ajouter Employe</button>
+				</div>
+				<table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	                <thead>
+		                <tr>
+		                    <th>Nom</th>
+		                    <th>Prenom</th>
+		                    <th>Groupe</th>
+		                    <th>ID sur l'empreinte</th>
+		                    <th>date d'adhésion</th>
+		                    <th>Actions</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+	                	{% include 'employees/components/list-emp.html' %}
+		            </tbody>
+	        	</table>
+			</div> <!-- end card-body -->
+		</div> <!-- end card -->
+	</div> <!-- end row -->
+
+{% include 'employees/components/add-emp.html' %}
+
+<div id="edit" class="modal fade bs-example-modal-center-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	{% include 'employees/components/edit-emp.html' %}
+</div><!-- /.modal -->
+
+{% endblock %}

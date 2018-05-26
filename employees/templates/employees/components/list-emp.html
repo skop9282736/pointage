@@ -1,0 +1,15 @@
+{% for salary in salaries %}
+	<tr>
+		<td>{{salary.last_name}}</td>
+		<td>{{salary.first_name}}</td>
+		<td>{{salary.group_salary}}</td>
+		<td>{{salary.id_salary_finger}}</td>
+		<td>{{salary.date_joined}}</td>
+		<td>
+			<button class="btn btn-info waves-effect waves-light edit_button"
+					data-toggle="modal"
+					data-target=".bs-example-modal-center-edit"
+					data-url="{% url 'employees:edit' salary.id %}"><i class="fa fa-pencil"></i></button>
+		</td>
+	</tr>
+{% endfor %}

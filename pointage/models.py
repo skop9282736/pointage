@@ -1,39 +1,22 @@
 from django.db import models
 from django.db.models.signals import post_save
-
+from employees.models import Salary, GroupSalaries
 # Create your models here.
-class GroupSalaries(models.Model):
-    # This class divide salaries by groups ex teacher, manager, saler...
-    name = models.CharField(max_length=255, null=True)
-
-    def __str__(self):
-        return self.name
-
 class TimeEnter(models.Model):
-	'''
-	This class is for giving the legal time to enter/out of
-	job by group.
-	'''
+    '''
+    This class is for giving the legal time to enter/out of
+    job by group.
+    '''
     group 				= models.OneToOneField(GroupSalaries, on_delete=models.CASCADE)
-    time_enter_morning 	= models.TimeField(null=False) #obligatory
+    time_enter_morning 	= models.TimeField(null=False)
     time_out_morning 	= models.TimeField(null=False)
-    time_enter_evening 	= models.TimeField(null=False, blank=True, null=True)
-    time_out_evening 	= models.TimeField(null=False, blank=True, null=True)
+    time_enter_evening 	= models.TimeField(null=False)
+    time_out_evening 	= models.TimeField(null=False)
     permanence 			= models.BooleanField(null=False, default=True)
 
     def __str__(self):
         return "{} {}".format(self.group,self.permanence)
 
-
-class Salary(models.Model):
-    id_salary_finger = models.IntegerField(unique=True, null=False)
-    group_salary = models.ForeignKey(GroupSalaries, on_delete=models.SET_NULL, null=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    picture = models.ImageField(null=True, default="img/salary/default.png", upload_to="img/salary")
-
-    def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
 
 class AtdRecord(models.Model):
     # This class represents records from the fingerprint
