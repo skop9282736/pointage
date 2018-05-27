@@ -33,16 +33,12 @@ new Vue({
 		.then(response => this.salaries = response.data)
 	},
 	methods: {
-
 		addSalary(event) {
 			axios.post('/employees/salaries/', this.$data.salary)
 			  .then(response => this.salaries.unshift(this.salary) )
 			  .then(response => this.salary = {})
 			  .then(function (response) {
-			    $.alert({
-				    title: 'Succès!',
-				    content: 'Employé ajouté avec succès!',
-				});
+				swal("Employé ajouté avec succès!");
 			  })
 			  .catch(errors => this.errors.record(errors.response.data))
 		},
@@ -65,6 +61,26 @@ new Vue({
 				    content: 'employé édité avec succès!',
 				});
 			  })
+		},
+		deleteSalary(salary, index){
+			this.salary = salary
+			this.getSalaryId(salary)
+			swal({
+			  title: "Êtes-vous sûr?",
+			  text: "Une fois supprimé, vous ne serez pas en mesure de récupérer cet enregistrement!",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			  	axios.delete('/employees/salaries/'+this.salaryId)
+			  	this.$delete(this.salaries, index)
+			    swal("employé supprimé.", {
+			      icon: "success",
+			    });
+			  }
+			});
 		}
 
 	}

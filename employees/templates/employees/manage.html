@@ -23,7 +23,7 @@
 		                </tr>
 	                </thead>
 	                <tbody>
-	                	<tr v-for="salary in salaries">
+	                	<tr v-for="(salary, index) in salaries">
 	                		<td v-text="salary.last_name"></td>
 	                		<td v-text="salary.first_name"></td>
 	                		<td v-text="salary.group_salary"></td>
@@ -33,7 +33,7 @@
 	                			<button class="btn btn-info" data-toggle="modal" data-target=".modal-edit" @click="showEditSalary(salary)">
 	                				<i class="fa fa-pencil"></i>
 	                			</button>
-	                			<button class="btn btn-danger">
+	                			<button class="btn btn-danger" @click="deleteSalary(salary, index)">
 	                				<i class="fa fa-trash"></i>
 	                			</button>
 	                		</td>
