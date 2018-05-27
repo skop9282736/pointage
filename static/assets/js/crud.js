@@ -1,62 +1,71 @@
-$(document).ready(function(){
-    $('#id_group_salary').addClass('form-control');
-    $('#id_date_joined').addClass('form-control');
-    $("#id_date_joined").prop("type", "date");
-    $('#edit_modal select').addClass('form-control');
-    $('#edit_modal #id_date_joined').addClass('form-control');
-    $("#edit_modal #id_date_joined").prop("type", "date");
-    
-    $('#add_employee_form').submit(function(e){
-        e.preventDefault();
-        var thisForm = $(this);
-        var action = thisForm.attr('action')
-        var formData = thisForm.serialize()
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-        $.ajax({
-            url: action,
-            method: 'post',
-            data: formData,
-            success: function(data){
-                if(data.added){
-                    $.confirm({
-                        title: 'Succès!',
-                        content: 'Employé ajouté avec succès',
-                        type: 'green',
-                        typeAnimated: true,
-                        buttons: {
-                            tryAgain: {
-                                text: 'OK',
-                                btnClass: 'btn-green',
-                                action: function(){
-                                }
-                            },
-                            close: function () {
-                            }
-                        }
-                    });
-                    $('#add_employee_form')[0].reset();
-                    $('#datatable-buttons tbody').html(data.salaries)
-                }
-            },
-            error: function(data){
-                console.log(data)
-            }
-        })
-    });
+class Errors {
+	constructor(){
+		this.errors = {};
+	}
+	get(field){
+		if (this.errors[field]){
+			return this.errors[field][0];
+		}
+	}
+	record(errors){
+		this.errors = errors;
+	}
+}
+new Vue({
+	el: '#root',
+	data:{
+		salaries: [],
+		salary: {
+			id_salary_finger: '',
+			group_salary: '',
+			first_name: '',
+			last_name: '',
+			date_joined: '',
+		},
+		salaryId: '',
+		errors: new Errors()
 
+	},
+	mounted(){
+		axios.get('/employees/salaries')
+		.then(response => this.salaries = response.data)
+	},
+	methods: {
 
+		addSalary(event) {
+			axios.post('/employees/salaries/', this.$data.salary)
+			  .then(response => this.salaries.unshift(this.salary) )
+			  .then(response => this.salary = {})
+			  .then(function (response) {
+			    $.alert({
+				    title: 'Succès!',
+				    content: 'Employé ajouté avec succès!',
+				});
+			  })
+			  .catch(errors => this.errors.record(errors.response.data))
+		},
+		showAddSalary(){
+			this.salary = {}
+		},
+		getSalaryId(salary){
+			axios.get('/employees/salaries/getid/'+salary.id_salary_finger)
+			.then(response => this.salaryId = response.data)
+		},
+		showEditSalary(salary){
+			this.salary = salary
+			this.getSalaryId(salary)
+		},
+		EditSalary(event) {
+			axios.put('/employees/salaries/'+this.salaryId+'/', this.$data.salary)
+			.then(function (response) {
+			    $.alert({
+				    title: 'Succès!',
+				    content: 'employé édité avec succès!',
+				});
+			  })
+		}
 
-    $('.edit_button').click(function(){
-        var btn = $(this);
-        var url = btn.attr('data-url');
-
-        $.ajax({
-            url: url,
-            method: 'get',
-            success: function(data){
-                $("#edit").html(data.html_form)
-                console.log(data)
-            }
-        })
-    })
-});
+	}
+})

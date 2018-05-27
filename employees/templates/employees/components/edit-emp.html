@@ -1,58 +1,46 @@
-    <div class="modal-dialog" id="edit_modal">
+<div id="myModal" class="modal fade modal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title mt-0" id="myModalLabel">Modifier un Eployee</h5>
+                <h5 class="modal-title mt-0" id="myModalLabel">Modifier un Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form method="post"  id="edit_employee_form" data-url="{% url 'employees:edit' form.instance.id %}"> {% csrf_token %}
-	            <div class="modal-body">
-	               	{{form.as_p}}
-	            </div>
-	            <div class="modal-footer">
-	                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Fermer</button>
-	                <button type="submit" class="btn btn-primary waves-effect waves-light">Modifier</button>
-	            </div>
-        	</form>
+            <form @submit.prevent="EditSalary"> {% csrf_token %}
+                <div class="modal-body">
+                        <div class="form-group">
+                            ID sur l'empreinte   
+                            <input type="number" name="id_salary_finger" class="form-control" v-model="salary.id_salary_finger">
+                            <p class="text-danger" v-text="errors.get('id_salary_finger') "></p>
+                        </div>
+                        <div class="form-group">
+                            Nom
+                            <input type="text" name="last_name" class="form-control" v-model="salary.last_name">
+                            <p class=" text-danger" v-text="errors.get('last_name') "></p>
+                        </div>
+                        <div class="form-group">
+                            Prenom
+                            <input type="text" name="first_name" class="form-control" v-model="salary.first_name">
+                            <p class=" text-danger" v-text="errors.get('first_name') "></p>
+                        </div>
+                        <div class="form-group">
+                            Groupe
+                            <select name="group_salary" class="form-control" v-model="salary.group_salary">
+                                {% for group in groups %}
+                                    <option value="{{group.id}}">{{group}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            date d'adhésion
+                            <input type="date" name="date_joined" class="form-control" v-model="salary.date_joined">
+                            <p class="text-danger" v-text="errors.get('date_joined') "></p>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Modifier</button>
+                </div>
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-<script type="text/javascript">
-    $('#edit_modal select').addClass('form-control');
-    $('#edit_modal #id_date_joined').addClass('form-control');
-    $("#edit_modal #id_date_joined").prop("type", "date");
-        $('#edit_employee_form').submit(function(e){
-        e.preventDefault();
-        var thisForm = $(this);
-        var action = thisForm.attr('data-url')
-        var formData = thisForm.serialize()
-
-        $.ajax({
-            url: action,
-            method: 'post',
-            data: formData,
-            success: function(data){
-                if(data.added){
-                    $.confirm({
-                        title: 'Succès!',
-                        content: 'Employé modifier avec succès',
-                        type: 'green',
-                        typeAnimated: true,
-                        buttons: {
-                            tryAgain: {
-                                text: 'OK',
-                                btnClass: 'btn-green',
-                                action: function(){
-                                }
-                            },
-                            close: function () {
-                            }
-                        }
-                    });
-                    $('#datatable-buttons tbody').html(data.salaries)
-                }
-            },
-            error: function(data){
-                console.log(data)
-            }
-        })
-    });
-</script>
+</div><!-- /.modal -->
