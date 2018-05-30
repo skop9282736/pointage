@@ -1,0 +1,38 @@
+.status{
+	height: 20px;
+	width: 20px;
+}
+
+.absent{
+	background-color: red;
+	color: white !important;
+}
+
+.break{
+	background-color: purple
+}
+
+.incomplete{
+	background-color: brown
+}
+
+.holiday{
+	background-color: lightblue
+}
+
+.late{
+	background-color: orange
+}
+
+.late_early{
+	background-color: black
+}
+
+.early{
+	background-color: blue
+}
+
+td.in_time{
+	background-color: green !important;
+	color: white;
+}

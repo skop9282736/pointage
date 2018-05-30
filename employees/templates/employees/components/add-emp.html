@@ -8,27 +8,31 @@
             <form @submit.prevent="addSalary"> {% csrf_token %}
 	            <div class="modal-body">
                         <div class="form-group">
-                            ID sur l'empreinte   
+                            ID sur l'empreinte*
                             <input type="number" name="id_salary_finger" class="form-control" v-model="salary.id_salary_finger">
-                            <p class="text-danger" v-text="errors.get('id_salary_finger') "></p>
+                            <p class="text-danger" v-text="errors.get('id_salary_finger')"></p>
                         </div>
                         <div class="form-group">
-                            Nom
+                            Nom*
                             <input type="text" name="last_name" class="form-control" v-model="salary.last_name">
                             <p class=" text-danger" v-text="errors.get('last_name') "></p>
                         </div>
                         <div class="form-group">
-                            Prenom
+                            Prenom*
                             <input type="text" name="first_name" class="form-control" v-model="salary.first_name">
                             <p class=" text-danger" v-text="errors.get('first_name') "></p>
                         </div>
                         <div class="form-group">
-                            Groupe
+                            Groupe*
                             <select name="group_salary" class="form-control" v-model="salary.group_salary">
                                 {% for group in groups %}
                                     <option value="{{group.id}}">{{group}}</option>
                                 {% endfor %}
                             </select>
+                        </div>
+                        <div class="form-group">
+                            Telephone
+                            <input type="text" name="phone" class="form-control" v-model="salary.phone">
                         </div>
                         <div class="form-group">
                             date d'adhésion

@@ -1,6 +1,8 @@
-from django.contrib import admin
 from django.urls import path
+from .views import profile
+
+app_name = 'templates'
 
 urlpatterns = [
-    path('', admin.site.urls),
+    path('profile/<int:id>', profile, name="profile"),
 ]

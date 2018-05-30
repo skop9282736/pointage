@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Profile
+{% endblock title %}
+
+{% load static %}
+{% block content %}
+	<div class="row">
+		<div class="col-6">
+			<div class="card">
+				<div class="card-body">
+					<div class="card m-b-30">
+                        <div class="card-body">
+                            <h4 class="mt-0 header-title">
+                            	résumé ce mois-ci
+                            </h4>
+                            <img src="{% static 'image/fingerprint.svg' %}" height="60">
+                            <ul class="list-inline widget-chart m-t-20 text-center">
+                                <li>
+                                    <h4 class=""><b>0</b></h4>
+                                    <p class="text-muted m-b-0">Absent</p>
+                                </li>
+                                <li>
+                                    <h4 class=""><b>52</b></h4>
+                                    <p class="text-muted m-b-0">Présent</p>
+                                </li>
+                                <li>
+                                    <h4 class=""><b>2</b></h4>
+                                    <p class="text-muted m-b-0">En retard</p>
+                                </li>
+                            </ul>
+
+                            <table class="table table-hover">
+                            	<tr>
+                            		<th>Nom</th>
+                            		<td>{{ salary.last_name }}</td>
+                            	</tr>
+                            	<tr>
+                            		<th>Prenom</th>
+                            		<td>{{ salary.first_name }}</td>
+                            	</tr>
+                            	<tr>
+                            		<th>Id sur l'empreinte digitale</th>
+                            		<td>{{ salary.id_salary_finger }}</td>
+                            	</tr>
+                            	<tr>
+                            		<th>Groupe</th>
+                            		<td>{{ salary.group_salary }}</td>
+                            	</tr>
+                            	<tr>
+                            		<th>Telephone</th>
+                            		<td>{{ salary.phone }}</td>
+                            	</tr>
+                            	<tr>
+                            		<th>Date jointe</th>
+                            		<td>{{ salary.date_joined }}</td>
+                            	</tr>
+                            </table>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="card">
+				<div class="card-body">
+					<form class="row" method="post">{% csrf_token %}
+                        <div class="form-control col-6">
+                            <label>date debut</label>
+                            <input type="date" name="start" class="form-control">
+                        </div>
+
+                        <div class="form-control col-6">
+                            <label>date de fin</label>
+                            <input type="date" name="end" class="form-control">
+                        </div>
+
+                        <div class="form-control col col-md-3 offset-md-4">
+                            <button class="btn btn-dark">Afficher les enregistrements</button>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="container">
+                            <div class="status status-red"></div> <span>Absent</span>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead class="bg-dark text-light">
+                            <th>Date</th>
+                            <th class="text-center">8 -> 15</th>
+                        </thead>
+                        <tbody>
+                            {% for d in dates %} 
+                                <tr>
+                                        {% if d.date %}
+                                            <td ><b>{{ d.date|date:'Y-m-d' }}</b></td>
+                                            <td class="text-center {{d.status1}}"><b>{{ d.in_morning|time:"H:i" }} - {{ d.out_morning|time:"H:i" }}</b></td>
+                                        {% else %}
+                                            <td ><b>{{ d }}</b></td>
+                                            <td class="absent text-center"><b>Absent</b></td>
+                                        {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

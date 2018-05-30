@@ -23,10 +23,11 @@ new Vue({
 			first_name: '',
 			last_name: '',
 			date_joined: '',
+			image:'',
+			phone:''
 		},
 		salaryId: '',
 		errors: new Errors()
-
 	},
 	mounted(){
 		axios.get('/employees/salaries')
@@ -62,6 +63,9 @@ new Vue({
 				});
 			  })
 		},
+		salaryUrl(id){
+			return  "/pointage/profile/"+id
+		},
 		deleteSalary(salary, index){
 			this.salary = salary
 			this.getSalaryId(salary)
@@ -82,6 +86,5 @@ new Vue({
 			  }
 			});
 		}
-
 	}
 })

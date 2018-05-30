@@ -14,6 +14,7 @@ class Salary(models.Model):
     first_name 		 = models.CharField(max_length=255)
     last_name 		 = models.CharField(max_length=255)
     # picture 		 = models.ImageField(blank=True,null=True, default="img/salary/default.png", upload_to="img/salary")
+    phone            = models.CharField(blank=True, null=True, max_length=20)
     date_joined      = models.DateField(null=True, blank=True)
 
     def __str__(self):
