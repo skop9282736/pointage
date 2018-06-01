@@ -80,27 +80,79 @@
                             <button class="btn btn-dark">Afficher les enregistrements</button>
                         </div>
                     </form>
-                    <div class="row">
-                        <div class="container">
-                            <div class="status status-red"></div> <span>Absent</span>
+                    <div class="d-flex  justify-content-around status-parent">
+                        <div class="">
+                            <div class="status absent"></div> <span>Absent</span>
+                        </div>
+                        <div class="">
+                            <div class="status late"></div> <span>Retard</span>
+                        </div>
+                        <div class="">
+                            <div class="status early"></div> <span>Tôt</span>
+                        </div>
+                        <div class="">
+                            <div class="status incomplete"></div> <span>Incomplet</span>
+                        </div>
+                        <div class="">
+                            <div class="status break"></div> <span>Congés</span>
+                        </div>
+                        <div class="">
+                            <div class="status holiday"></div> <span>Vacances</span>
+                        </div>
+                        <div class="">
+                            <div class="status in_time"></div> <span>à l'heure</span>
                         </div>
                     </div>
-                    <table class="table">
+                    <div>
+                        <button class="float-right btn btn-secondary btn-lg" id="print">print</button>
+                    </div>
+                    <table class="table" id="table">
                         <thead class="bg-dark text-light">
                             <th>Date</th>
-                            <th class="text-center">8 -> 15</th>
+                            <th class="text-center">
+                                <td class="text-center">{{legal_time.time_enter_morning|time:"H:i"}} - {{legal_time.time_out_morning|time:"H:i"}}</td>
+                                {% if not legal_time.full_time %}
+                                    <td class="text-center">{{legal_time.time_enter_evening|time:"H:i"}} - {{legal_time.time_out_evening|time:"H:i"}}</td>
+                                {% endif %}
+                            </th>
                         </thead>
                         <tbody>
-                            {% for d in dates %} 
-                                <tr>
+                            {% for d in dates %}
+                                {% if not forloop.last %}
+                                    <tr>
                                         {% if d.date %}
-                                            <td ><b>{{ d.date|date:'Y-m-d' }}</b></td>
-                                            <td class="text-center {{d.status1}}"><b>{{ d.in_morning|time:"H:i" }} - {{ d.out_morning|time:"H:i" }}</b></td>
+                                            <td colspan="2">{{ d.date|date:'Y-m-d' }}</td>
+                                            {% if d.status1 == 'absent' %}
+                                                <td class="absent text-center" >Absent</td>
+                                            {% else %}
+                                                <td class="text-center {{d.status1}}">{{ d.in_morning|time:"H:i" }} - {{ d.out_morning|time:"H:i" }}</td>
+                                            {% endif %}
+                                            {% if not legal_time.full_time %}
+                                                <td class="text-center {{d.status2}} td-border">{{ d.in_evening|time:"H:i" }} - {{ d.out_evening|time:"H:i" }}</td>
+                                            {% endif %}
                                         {% else %}
-                                            <td ><b>{{ d }}</b></td>
-                                            <td class="absent text-center"><b>Absent</b></td>
+                                            <td colspan="2">{{ d }}</td>
+                                            <td class="absent text-center" >Absent</td>
+                                            {% if not legal_time.full_time %}
+                                                <td class="absent text-center td-border">Absent</td>
+                                            {% endif %}
                                         {% endif %}
-                                </tr>
+                                    </tr>
+                                {% endif %}
+                                {% if forloop.last %}
+                                    <tr>
+                                        <td class="align-middle"><b>Résumé</b></td>
+                                        <td colspan="3" class="text-center ">
+                                            <p>Heures: {{d.0.nb_hours__sum}}</p>
+                                            <hr>
+                                            {% comment %}
+                                             <p>Minutes: {{d.1.nb_minutes__sum}}</p>
+                                            <hr>
+                                             {% endcomment %} 
+                                            <p>Absents: {{ d.2 }}</p>
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
@@ -108,4 +160,15 @@
 			</div>
 		</div>
 	</div>
+        <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+        <script>
+        $(function() {
+            $('#print').click(function(){
+                $('#table').printThis();
+            });
+        });
+    </script>
 {% endblock content %}

@@ -1,10 +1,18 @@
+.status-parent{
+	margin: 20px 0;
+}
+.status-parent span{
+	display: inline-block;
+}
 .status{
 	height: 20px;
 	width: 20px;
+	display: inline-block;
+	border-radius: 20px;
 }
 
 .absent{
-	background-color: red;
+	background-color: #EE4623;
 	color: white !important;
 }
 
@@ -13,7 +21,8 @@
 }
 
 .incomplete{
-	background-color: brown
+	background-color: #36465D;
+	color: white
 }
 
 .holiday{
@@ -25,14 +34,18 @@
 }
 
 .late_early{
-	background-color: black
+	background-color: #417690
 }
 
 .early{
 	background-color: blue
 }
 
-td.in_time{
-	background-color: green !important;
+.in_time{
+	background-color: #5FCF80 !important;
 	color: white;
+}
+
+.td-border{
+	border-left: 1px solid white;
 }

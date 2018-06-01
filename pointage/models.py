@@ -68,13 +68,15 @@ class Summary(models.Model):
         return "Sumarry for: {}".format(self.salary)
 
 
+
+
 def post_save_atd_reciever(sender, instance, *args, **kwargs):
-    salary  = instance.CardNo
-    date    = instance.RecDate
-    time    = instance.RecTime
-    group   = salary.group_salary
-    legal_time = TimeEnter.objects.get(group=group)
-    summary = exists(salary, date, time, Summary)
+    salary      = instance.CardNo
+    date        = instance.RecDate
+    time        = instance.RecTime
+    group       = salary.group_salary
+    legal_time  = TimeEnter.objects.get(group=group)
+    summary     = exists(salary, date, time, Summary)
 
     if summary == (-1): # not exists
         summary = (Summary(salary = salary, date=date), '-1')
