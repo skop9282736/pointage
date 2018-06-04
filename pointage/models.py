@@ -82,7 +82,7 @@ def post_save_atd_reciever(sender, instance, *args, **kwargs):
         summary = (Summary(salary = salary, date=date), '-1')
         summary[0].save()
 
-    set_time(summary[0], time, legal_time)
+    set_time(summary[0] , time, legal_time)
     set_status(summary[0], legal_time)
     set_hours(summary[0], legal_time)
 

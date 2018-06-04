@@ -158,7 +158,7 @@ def set_hours(summary, legal_time):
 
 
 
-def show_pointages(start, end, salary, Summary, legal_time):
+def show_pointages(start, end, salary, Summary, legal_time=None):
 	start_date 	 = datetime.datetime.strptime(start, "%Y-%m-%d")
 	end_date 	 = datetime.datetime.strptime(end, "%Y-%m-%d")
 	dates 		 = [(start_date + datetime.timedelta(days=i)).strftime('%Y-%m-%d') for i in
@@ -181,3 +181,30 @@ def show_pointages(start, end, salary, Summary, legal_time):
 
 	dates.append([total_hours, total_minutes, total_absent])
 	return dates
+
+# def show_pointages_all(start, end, salary, Summary, legal_time=None):
+# 	start_date 	 = datetime.datetime.strptime(start, "%Y-%m-%d")
+# 	end_date 	 = datetime.datetime.strptime(end, "%Y-%m-%d")
+# 	dates 		 = [(start_date + datetime.timedelta(days=i)).strftime('%Y-%m-%d') for i in
+#                      range(0, (end_date - start_date).days + 1)]
+# 	summaries 	 = Summary.objects.filter(date__range=(start_date, end_date))
+# 	salaries	 = Salary
+# 	total_hours  = summaries.aggregate(Sum('nb_hours'))
+# 	total_minutes= summaries.aggregate(Sum('nb_minutes'))
+# 	total_absent = len(dates)
+# 	dates_to_show = dates # dates li aybano l fo9 ==> just for reading
+
+# 	for j,date in enumerate(dates):
+# 		for salary in salaries:
+# 			if summary.date == datetime.datetime.strptime(date, "%Y-%m-%d").date():
+# 				dates[j] = summary
+# 				total_absent -= 1
+
+# 	if not legal_time.full_time:
+# 		total_absent = total_absent * 2
+# 		total_absent += summaries.filter(status1='absent').count()
+# 		total_absent += summaries.filter(status2='absent').count()
+
+# 	dates.append([total_hours, total_minutes, total_absent])
+# 	dates.append(dates_to_show)
+# 	return dates

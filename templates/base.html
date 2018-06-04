@@ -41,9 +41,16 @@
                         </li>
 
                         <li class="has-submenu">
-                            <a href="#"><i class="ti-crown"></i>Employés</a>
+                            <a href="#"><i class="ti-user"></i>Employés</a>
                             <ul class="submenu">
                                 <li><a href="{% url 'employees:manage' %}">Gérer les employés</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has-submenu">
+                            <a href="#"><i class="ti-book"></i>présence</a>
+                            <ul class="submenu">
+                                <li><a href="{% url 'pointage:reports' %}">Rapport</a></li>
                             </ul>
                         </li>
 

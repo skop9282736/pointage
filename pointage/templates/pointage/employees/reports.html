@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Rapport
+{% endblock title %}
+
+{% load mathfilters %}
+{% load extra_tags %}
+
+{% block content %}
+<div class="row">
+   <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form class="row" method="post">{% csrf_token %}
+                    <div class="form-control col-6">
+                        <label>date debut</label>
+                        <input type="date" name="start" class="form-control">
+                    </div>
+
+                    <div class="form-control col-6">
+                        <label>date de fin</label>
+                        <input type="date" name="end" class="form-control">
+                    </div>
+
+                    <div class="form-control col col-md-3 offset-md-4">
+                        <button class="btn btn-dark">Afficher les enregistrements</button>
+                    </div>
+                </form>
+                <div class="d-flex  justify-content-around status-parent">
+                    <div class="">
+                        <div class="status absent"></div> <span>Absent</span>
+                    </div>
+                    <div class="">
+                        <div class="status late"></div> <span>Retard</span>
+                    </div>
+                    <div class="">
+                        <div class="status early"></div> <span>Tôt</span>
+                    </div>
+                    <div class="">
+                        <div class="status incomplete"></div> <span>Incomplet</span>
+                    </div>
+                    <div class="">
+                        <div class="status break"></div> <span>Congés</span>
+                    </div>
+                    <div class="">
+                        <div class="status holiday"></div> <span>Vacances</span>
+                    </div>
+                    <div class="">
+                        <div class="status in_time"></div> <span>à l'heure</span>
+                    </div>
+                </div>
+                <div>
+                    <button class="float-right btn btn-secondary btn-lg" id="print">Imprimer <i class="fa fa-print"></i></button>
+                </div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nom/Date</th>
+                            {% for d in dates.1 %}
+                             {% if not forloop.last %}
+                              {% if d.date %}
+                                  <th>{{d.date|date:"Y-m-d"}}</th>
+                              {%else%}
+                                  <th>{{d}}</th>
+                              {% endif %}
+                             {% endif %}
+                            {% endfor %}
+                            <th>Résumé</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in dates %}
+                            {% if forloop.counter|mod:2 != 0 %}
+                                <tr>
+                            {% endif %}
+                                {% for d_in in d %}
+                                    {% if d_in.date %}
+                                        <td class="align-middle">
+                                            {% if d_in.in_morning or d_in.out_morning %}
+                                                <p class="{{d_in.status1}} text-center">{{ d_in.in_morning|time:"H:i" }}-{{ d_in.out_morning|time:"H:i" }}</p>
+                                            {% else %}
+                                                <p class="absent text-center">Absent</p>
+                                            {% endif %}
+                                            {% if d_in.in_evening or d_in.out_evening %}
+                                                <p class="{{d_in.status2}} text-center">{{ d_in.in_evening|time:"H:i" }}-{{ d_in.out_evening|time:"H:i" }}</p>
+                                            {% else %}
+                                                <p class="absent text-center">Absent</p>
+                                            {% endif %}
+                                        </td>
+                                    {% else %}
+                                        {% if d_in != '0' %}
+                                            {% if d_in.0.nb_hours__sum %}
+                                                <td class="align-middle">heures: {{ d_in.0.nb_hours__sum }} | Absences: {{ d_in.2 }}</td>
+                                            {% else %}
+                                                <td class="align-middle">
+                                                    {% if d_in.nb_hours__sum == None and forloop.last %}
+                                                        -
+                                                    {% elif forloop.first %}
+
+                                                        {% if d_in|get_type == "0" %}
+                                                            <p>{{d_in}}</p>
+                                                        {% else %}
+                                                            <p class="absent text-center">Absent</p>
+                                                        {% endif %}
+
+                                                    {% else %}
+                                                        <p class="absent text-center">Absent</p>
+                                                    {% endif %}
+
+                                                </td>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% if forloop.counter|mod:1 != 0 %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
