@@ -1,0 +1,45 @@
+<div id="myModal2" class="modal fade bs-example-modal-center1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myModalLabel">Geree un Groupe</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="col-12 card" >
+                    <div class="card-body" id="emp_list">
+						
+                        
+                        <table class="table" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Identifient Groupe</th>
+                                    <th>Nom Groupe</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(group,index) in groups">
+                                    <td v-text="group.id"></td>
+                                    <td v-text="group.name"></td>
+                                    
+                                    <td>
+                                        <button class="btn btn-info" data-toggle="modal" data-target="#myModalEditeGroup" @click="showEditGroup(group)">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-danger" @click="deleteGroup(group, index)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> <!-- end card-body -->
+                </div> <!-- end card -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Fermer</button>
+                    <!-- <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button> -->
+                    <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal1"   ><i class="fa fa-user-plus"></i>   Ajouter Groupe</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->

@@ -1,0 +1,25 @@
+<div id="myModalEditeGroup" class="modal fade modal-edit " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Modifier un Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form @submit.prevent="editGroup"> {% csrf_token %} 
+                <div class="modal-body">
+                       
+                        <div class="form-group">
+                            Nom
+                            <input type="text" name="name" class="form-control" v-model="groupSalary.name">
+                            <p class=" text-danger" v-text="errors.get('name') "></p>
+                        </div>
+                        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light"  data-dismiss="modal">Modifier</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

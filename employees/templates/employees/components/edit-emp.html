@@ -5,7 +5,7 @@
                 <h5 class="modal-title mt-0" id="myModalLabel">Modifier un Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form @submit.prevent="EditSalary"> {% csrf_token %}
+            <form @submit.prevent="EditSalary"> {% csrf_token %} 
                 <div class="modal-body">
                         <div class="form-group">
                             ID sur l'empreinte   
@@ -28,6 +28,7 @@
                                 {% for group in groups %}
                                     <option value="{{group.id}}">{{group}}</option>
                                 {% endfor %}
+                                
                             </select>
                         </div>
                         <div class="form-group">
