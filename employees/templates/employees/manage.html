@@ -4,56 +4,64 @@
 
 {% block content %}
 	<div class="row" id="root">
-		<div class="col-12 card">
-				<h3>gestion des employés</h3>
-				<hr>
-			<div class="card-body" id="emp_list">
-				<div class="form-group">
-					<button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-center1" @click='showAddSalary'><i class="fa fa-user-plus"></i>Ajouter Employe</button>
-				</div>
-				<div class="table-rep-plugin">
-                	<div class="table-responsive b-0" data-pattern="priority-columns">
-						<table id="tech-companies-1" class="table  table-striped">
-			                <thead>
-				                <tr>
-				                    <th>Nom</th>
-				                    <th>Prenom</th>
-				                    <th>Groupe</th>
-				                    <th>ID sur l'empreinte</th>
-				                    <th>date d'adhésion</th>
-				                    <th>Actions</th>
-				                </tr>
-			                </thead>
-			                <tbody>
-			                	<tr v-for="(salary, index) in salaries">
-			                		<td v-text="salary.last_name"></td>
-			                		<td v-text="salary.first_name"></td>
-			                		<td v-text="salary.group_salary"></td>
-			                		<td v-text="salary.id_salary_finger"></td>
-			                		<td v-text="salary.date_joined"></td>
-			                		<td>
-			                			<button class="btn btn-info" data-toggle="modal" title="Modifier" data-target=".modal-edit" @click="showEditSalary(salary)">
-			                				<i class="fa fa-pencil"></i>
-			                			</button>
-			                			<button class="btn btn-danger" title="Supprimé" @click="deleteSalary(salary, index)">
-			                				<i class="fa fa-trash"></i>
-			                			</button>
-			                			<a class="btn btn-secondary" title="Profile" v-bind:href="salaryUrl(salary.id_salary_finger)"><i class="fa fa-user"></i></a>
-			                		</td>
-			                	</tr>
-				            </tbody>
-			        	</table>
-			        </div>
-			    </div>
-			</div> <!-- end card-body -->
-		</div> <!-- end card -->
+			<div class="col-12 card" >
+					<h3>gestion des employés</h3>
+					<hr>
+					
+				<div class="card-body" id="emp_list">
+					<div class="form-group">
+						<button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-center1" @click='showAddSalary'><i class="fa fa-user-plus"></i>   Ajouter Employe</button>
+						<button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal2"   ><i class="fa fa-user-plus"></i>   Show Groupe</button>
+					</div>
+					<table class="table" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Nom</th>
+								<th>Prenom</th>
+								<th>Groupe</th>
+								<th>ID sur l'empreinte</th>
+								<th>date d'adhésion</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(salary, index) in salaries">
+								<td v-text="salary.last_name"></td>
+								<td v-text="salary.first_name"></td>
+								<td v-text="salary.group_salary"></td>
+								<td v-text="salary.id_salary_finger"></td>
+								<td v-text="salary.date_joined"></td>
+								<td>
+									<button class="btn btn-info" data-toggle="modal" data-target=".modal-edit" @click="showEditSalary(salary)">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-danger" @click="deleteSalary(salary, index)">
+										<i class="fa fa-trash"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div> <!-- end card-body -->
+			</div> <!-- end card -->
+		
+		
 
 	{% include 'employees/components/add-emp.html'  %}
 
 	{% include 'employees/components/edit-emp.html' %}
+	
+	{% include 'employees/components/show-grp.html' %}
+	
+	{% include 'employees/components/edit-grp.html' %}
+			
+	{% include 'employees/components/add-grp.html' %}
+	
 
 	</div> <!-- end row -->
 
+	
+		
 
 
 {% endblock %}
