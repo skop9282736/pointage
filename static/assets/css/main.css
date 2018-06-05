@@ -49,3 +49,7 @@
 .td-border{
 	border-left: 1px solid white;
 }
+
+#table-report p{
+	border-radius: 10%
+}
