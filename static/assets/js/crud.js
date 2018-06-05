@@ -17,6 +17,10 @@ new Vue({
 	el: '#root',
 	data:{
 			salaries: [],
+			groups: [],
+			salaryId: '',
+			groupId:'',
+			modalShown: true,
 			salary: {
 					id_salary_finger: '',
 					group_salary: {id: '',name:'',},
@@ -24,13 +28,10 @@ new Vue({
 					last_name: '',
 					date_joined: '',
 			},
-			salaryId: '',
-			groups: [],
 			groupSalary: {
 					id:'',
 					name:'',
 			},
-			groupId:'',
 			errors: new Errors()
 	},
 	mounted(){
@@ -45,11 +46,9 @@ new Vue({
 	},
 	filters:{
 		group_salary_name:function(value){
-				
 		}
 	},
 	methods: {
-	
 		addSalary(event) {
 			axios.post('/employees/salaries/', this.$data.salary)
 			  .then(response => this.salaries.unshift(this.salary) )
@@ -58,6 +57,7 @@ new Vue({
 				swal("Employé ajouté avec succès!");
 			  })
 			  .catch(errors => this.errors.record(errors.response.data))
+			  this.modalShown = false
 		},
 		showAddSalary(){
 			this.salary = {}
@@ -78,6 +78,9 @@ new Vue({
 				    content: 'employé édité avec succès!',
 				});
 			  })
+		},
+		salaryUrl(id){
+			return  "/pointage/profile/"+id
 		},
 		deleteSalary(salary, index){
 			this.salary = salary
@@ -100,7 +103,7 @@ new Vue({
 			});
 		},
 		// ________________________________________________function crud groupe___________________________
-		showAddGroup(){  
+		showAddGroup(){
 			this.groupSalary = {}
 		},
 		addGroup(event) {
@@ -108,10 +111,9 @@ new Vue({
 			  .then(response => this.groups.unshift(this.groupSalary) )
 			  .then(response => this.groupSalary = {})
 			  .then(function (response) {
-				swal("Employé ajouté avec succès!");
+				swal("Groupe ajouté avec succès!");
 			  })
 				.catch(errors => this.errors.record(errors.response.data))
-				
 				axios.get('/employees/groups')
 				.then(response => this.groups = response.data)
 		},
@@ -127,7 +129,7 @@ new Vue({
 			axios.put('/employees/groups/'+this.groupId+'/', this.$data.groupSalary)
 			.then(function (response) {
 			    $.alert({title: 'Succès!',content: 'groupe édité avec succès!',});
-			})   
+			})
 		},
 		deleteGroup(group, index){
 			this.group = group
@@ -149,9 +151,6 @@ new Vue({
 			  }
 			});
 		},
-		
-	
-	
 	}
 })
 
