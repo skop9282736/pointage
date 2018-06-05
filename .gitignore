@@ -1,5 +1,8 @@
 src/settings/__pycache__
+pointage/__pycache__
+employee/__pycache__
 
-pointage/migrations/
+pointage/migrations
+employee/migrations
 
 db.sqlite3

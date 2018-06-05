@@ -8,8 +8,8 @@
 {% load extra_tags %}
 
 {% block content %}
-<div class="row">
-   <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+<div class="row justify-content-center">
+   <div class="col-lg-9 col-md-12 col-xs-12 col-sm-12">
         <div class="card">
             <div class="card-body">
                 <form class="row" method="post">{% csrf_token %}
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-control col col-md-3 offset-md-4">
-                        <button class="btn btn-dark">Afficher les enregistrements</button>
+                        <button class="btn btn-dark btn-block">Afficher les enregistrements</button>
                     </div>
                 </form>
                 <div class="d-flex  justify-content-around status-parent">
@@ -53,7 +53,7 @@
                 <div>
                     <button class="float-right btn btn-secondary btn-lg" id="print">Imprimer <i class="fa fa-print"></i></button>
                 </div>
-                <table class="table">
+                <table class="table table-responsive-sm">
                     <thead class="thead-dark">
                         <tr>
                             <th>Nom/Date</th>

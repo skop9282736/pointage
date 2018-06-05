@@ -3,8 +3,8 @@
 {% block title %} Gerer les employes {% endblock %}
 
 {% block content %}
-	<div class="row" id="root">
-			<div class="col-12 card" >
+	<div class="row justify-content-center" id="root">
+			<div class="col-lg-9 col-xs-12 card" >
 					<h3>gestion des employés</h3>
 					<hr>
 
@@ -13,7 +13,7 @@
 						<button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-center1" @click='showAddSalary'><i class="fa fa-user-plus"></i>   Ajouter Employe</button>
 						<button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal2"   ><i class="fa fa-users"></i> Gérer groupes</button>
 					</div>
-					<table class="table" cellspacing="0">
+					<table class="table table-responsive-sm" cellspacing="0">
 						<thead>
 							<tr>
 								<th>Nom</th>
