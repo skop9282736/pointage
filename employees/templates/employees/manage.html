@@ -28,7 +28,7 @@
 							<tr v-for="(salary, index) in salaries">
 								<td v-text="salary.last_name"></td>
 								<td v-text="salary.first_name"></td>
-								<td v-text="salary.group_salary"></td>
+								<td v-text="getSalaryName(salary.group_salary)"></td>
 								<td v-text="salary.id_salary_finger"></td>
 								<td v-text="salary.date_joined"></td>
 								<td>

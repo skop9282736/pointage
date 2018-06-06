@@ -23,7 +23,7 @@ new Vue({
 			modalShown: true,
 			salary: {
 					id_salary_finger: '',
-					group_salary: {id: '',name:'',},
+					group_salary: '',
 					first_name: '',
 					last_name: '',
 					date_joined: '',
@@ -44,11 +44,20 @@ new Vue({
 			// salaries.salary.group_salary_name = data.name
 		})
 	},
-	filters:{
-		group_salary_name:function(value){
-		}
-	},
+	
 	methods: {
+		getSalaryName(salaryId){
+			var name = ''
+			// console.log(salaryId)
+			if(!salaryId) return name;
+			this.groups.filter((g) => {
+					if(salaryId == g.id){
+						name = g.name
+						
+					}
+			})
+			return name
+		},
 		addSalary(event) {
 			axios.post('/employees/salaries/', this.$data.salary)
 			  .then(response => this.salaries.unshift(this.salary) )
@@ -58,6 +67,12 @@ new Vue({
 			  })
 			  .catch(errors => this.errors.record(errors.response.data))
 			  this.modalShown = false
+
+			  axios.get('/employees/groups')
+		.then(response => {
+			this.groups = response.data;
+			// salaries.salary.group_salary_name = data.name
+		})
 		},
 		showAddSalary(){
 			this.salary = {}
