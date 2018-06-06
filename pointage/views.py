@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from employees.models import Salary
+from employees.models import Salary, GroupSalaries
 from .models import Summary, TimeEnter
 from .pointages import show_pointages
 
@@ -7,6 +7,7 @@ from .pointages import show_pointages
 def profile(request, *args, **kwargs):
 	salary 		= get_object_or_404(Salary, id_salary_finger = kwargs['id'])
 	new_list 	= []
+	# group = get_object_or_404(GroupSalaries, salary.group)
 	legal_time 	= get_object_or_404(TimeEnter, group=salary.group_salary)
 
 	if request.method == 'POST':

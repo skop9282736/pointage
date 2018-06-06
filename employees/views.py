@@ -26,3 +26,7 @@ def get_salary_id(request, id_salary_finger):
 def get_group_id(request, id):
 	group = GroupSalaries.objects.filter(id=id).first()
 	return HttpResponse(group.id)
+
+def get_name_fk(request,id):
+	groupe = GroupSalaries.objects.filter(id = id).first()
+	return HttpResponse(groupe.name)

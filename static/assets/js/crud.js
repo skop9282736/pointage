@@ -13,17 +13,26 @@ class Errors {
 		this.errors = errors;
 	}
 }
+
 new Vue({
+	
 	el: '#root',
 	data:{
 			salaries: [],
 			salary: {
 					id_salary_finger: '',
-					group_salary: {id: '',name:'',},
+					group_salary: '',
 					first_name: '',
 					last_name: '',
 					date_joined: '',
 			},
+			salary1: {
+				id_salary_finger: '',
+				group_salary: {id:'',name:''},
+				first_name: '',
+				last_name: '',
+				date_joined: '',
+		},
 			salaryId: '',
 			groups: [],
 			groupSalary: {
@@ -40,16 +49,22 @@ new Vue({
 		axios.get('/employees/groups')
 		.then(response => {
 			this.groups = response.data;
-			// salaries.salary.group_salary_name = data.name
+			
 		})
 	},
-	filters:{
-		group_salary_name:function(value){
-				
-		}
-	},
 	methods: {
-	
+		getSalaryName(salaryId){
+			var name = ''
+			// console.log(salaryId)
+			if(!salaryId) return name;
+			this.groups.filter((g) => {
+					if(salaryId == g.id){
+						name = g.name
+						
+					}
+			})
+			return name
+		},
 		addSalary(event) {
 			axios.post('/employees/salaries/', this.$data.salary)
 			  .then(response => this.salaries.unshift(this.salary) )
@@ -58,7 +73,9 @@ new Vue({
 				swal("Employé ajouté avec succès!");
 			  })
 			  .catch(errors => this.errors.record(errors.response.data))
+			  this.modalShown = false
 		},
+
 		showAddSalary(){
 			this.salary = {}
 		},
@@ -108,14 +125,22 @@ new Vue({
 			  .then(response => this.groups.unshift(this.groupSalary) )
 			  .then(response => this.groupSalary = {})
 			  .then(function (response) {
-				swal("Employé ajouté avec succès!");
+				swal("Groupe ajouté avec succès!");
+
 			  })
 				.catch(errors => this.errors.record(errors.response.data))
-				
 				axios.get('/employees/groups')
-				.then(response => this.groups = response.data)
+				.then(response => {
+					this.groups = response.data;
+					
+				})
+				
 		},
 		getGroupId(groupSalary){
+			axios.get('/employees/groups/getid/'+groupSalary.id)
+			.then(response => this.groupId = response.data)
+		},
+		getGroupName(groupSalary){
 			axios.get('/employees/groups/getid/'+groupSalary.id)
 			.then(response => this.groupId = response.data)
 		},

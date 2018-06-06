@@ -3,3 +3,5 @@ src/settings/__pycache__
 pointage/migrations/
 
 db.sqlite3
+
+epmloyees/__pycache__
