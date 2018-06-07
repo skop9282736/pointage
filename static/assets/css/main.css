@@ -53,3 +53,11 @@
 #table-report p{
 	border-radius: 10%
 }
+.editeMyTable{
+	text-align: center
+}
+.DivWithScroll{
+    height:400px;
+    overflow:scroll;
+    overflow-x:hidden;
+}

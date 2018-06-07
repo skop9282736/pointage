@@ -7,32 +7,30 @@
                 </div>
                 <div class="col-12 card" >
                     <div class="card-body" id="emp_list">
-						
-                        
-                        <table class="table" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Identifient Groupe</th>
-                                    <th>Nom Groupe</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(group,index) in groups">
-                                    <td v-text="group.id"></td>
-                                    <td v-text="group.name"></td>
-                                    
-                                    <td>
-                                        <button class="btn btn-info" data-toggle="modal" data-target="#myModalEditeGroup" @click="showEditGroup(group)">
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
-                                        <button class="btn btn-danger" @click="deleteGroup(group, index)">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="DivWithScroll ">
+                            <table class="table editeMyTable" cellspacing="0" >
+                                <thead>
+                                    <tr>
+                                        <th>Nom Groupe</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(group,index) in groups">
+                                        <td v-text="group.name"></td>
+                                        
+                                        <td>
+                                            <button class="btn btn-info" data-toggle="modal" data-target="#myModalEditeGroup" @click="showEditGroup(group)">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-danger" @click="deleteGroup(group, index)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div> <!-- end card-body -->
                 </div> <!-- end card -->
                 <div class="modal-footer">
