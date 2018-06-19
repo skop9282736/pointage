@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from employees.models import Salary, GroupSalaries
 from .models import Summary, TimeEnter
 from .pointages import show_pointages
-
+from django.http import JsonResponse
+from rest_framework import viewsets
+from .serializers import TimeSerializer, GroupSerializer
 # Create your views here.
 def profile(request, *args, **kwargs):
 	try:
@@ -45,3 +47,20 @@ def reports(request):
 		'dates' : new_list,
 	}
 	return render(request, 'pointage/employees/reports.html', context)
+
+def manage(request):
+	groups = GroupSalaries.objects.order_by('-id')
+	return render(request,'pointage/times/manage.html',{'groups':groups})
+
+
+class TimeEnterView(viewsets.ModelViewSet):
+	queryset = TimeEnter.objects.order_by('-id')
+	serializer_class = TimeSerializer
+
+class GroupView(viewsets.ModelViewSet):
+	queryset = GroupSalaries.objects.order_by('-id')
+	serializer_class = GroupSerializer
+
+def get_time_id(request, id):
+	time = TimeEnter.objects.filter(id=id).first()
+	return HttpResponse(time.id)

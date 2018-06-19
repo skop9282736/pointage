@@ -28,10 +28,12 @@ new Vue({
 					last_name: '',
 					date_joined: '',
 			},
+			// Groupe DATA ---------
 			groupSalary: {
 					id:'',
 					name:'',
 			},
+			
 			errors: new Errors()
 	},
 	mounted(){
@@ -41,17 +43,15 @@ new Vue({
 		axios.get('/employees/groups')
 		.then(response => {
 			this.groups = response.data;
-			// salaries.salary.group_salary_name = data.name
 		})
 	},
 	
 	methods: {
-		getSalaryName(salaryId){
+		getSalaryName(groupId){
 			var name = ''
-			// console.log(salaryId)
-			if(!salaryId) return name;
+			if(!groupId) return name;
 			this.groups.filter((g) => {
-					if(salaryId == g.id){
+					if(groupId == g.id){
 						name = g.name
 						
 					}
@@ -166,6 +166,11 @@ new Vue({
 			  }
 			});
 		},
+		// ________________________________________________function crud Time Enter___________________________
+
 	}
-})
+});
+
+
+
 
