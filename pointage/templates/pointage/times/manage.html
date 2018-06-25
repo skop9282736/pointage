@@ -15,89 +15,86 @@
                             <h4 class="mt-0 header-title">Temps entrer</h4>
 
                             <div class="form-group">
-                                    <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-center1" ><i class="fa fa-user-plus"></i> Ajouter Tempes</button>
+                                    <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal0" @click="showAddTimeEnter" ><i class="fa fa-user-plus"></i> Ajouter Tempes</button>
                             </div>
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>group</th>
-                                    <th>time_enter_morning</th>
-                                    <th>time_out_morning</th>
-                                    <th>time_enter_evening</th>
-                                    <th>time_out_evening</th>
-                                    <th>full_time</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="(time, index) in times">
-                                    <th scope="row" v-text="index + 1">1</th>
-                                    <td  v-text="getSalaryName(time.group)"></td>
-                                    <td  v-text="time.time_enter_morning"></td>
-                                    <td  v-text="time.time_out_morning"></td>
-                                    <td  v-text="time.time_enter_evening"></td>
-                                    <td  v-text="time.time_out_evening"></td>
-                                    <td  v-text="isPermanence(time)"></td>
-                                    <td>
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".modal-edit"  @click="showEditTime(time)" >
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
-                                        <button class="btn btn-danger" @click="deleteTime(time, index)">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                        <a class="btn btn-secondary" title="Profile"><i class="fa fa-user"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-
+                            <div class="DivWithScroll">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>group</th>
+                                        <th>time_enter_morning</th>
+                                        <th>time_out_morning</th>
+                                        <th>time_enter_evening</th>
+                                        <th>time_out_evening</th>
+                                        <th>full_time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(time, index) in times">
+                                        <th scope="row" v-text="index + 1">1</th>
+                                        <td  v-text="getGroupName(time.group)"></td>
+                                        <td  v-text="time.time_enter_morning"></td>
+                                        <td  v-text="time.time_out_morning"></td>
+                                        <td  v-text="time.time_enter_evening"></td>
+                                        <td  v-text="time.time_out_evening"></td>
+                                        <td  v-text="isPermanence(time)"></td>
+                                        <td>
+                                            <button class="btn btn-info" data-toggle="modal" data-target=".modal-edit"  @click="showEditTime(time)" >
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-danger" @click="deleteTime(time, index)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-</div> 
+                    </div> 
                 </div> <!-- end col -->
           
                 
 
-        <div class="row">
                 <div class="col-lg-6">
                     <div class="card m-b-30">
                         <div class="card-body">
 
                             <h4 class="mt-0 header-title">Break</h4>
-                            <p class="text-muted m-b-30 font-14">
-                                Use <code>.table-striped</code> to add zebra-striping to any table row
-                                within the <code>&lt;tbody&gt;</code>.
-                            </p>
-
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".modal-edit" >
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
-                                        <button class="btn btn-danger" >
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                        <a class="btn btn-secondary" title="Profile"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-
+                            <div class="form-group" >
+                                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal1" @click="showAddBreak" ><i class="fa fa-user-plus"></i> Ajouter Break</button>
+                            </div>
+                            <div class="DivWithScroll">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Salary</th>
+                                        <th>Start</th>
+                                        <th>End</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(breack,index) in Breacks" >
+                                        <th scope="row" v-text="1 + index"></th>
+                                        <td v-text="getSalaryName(breack.salary)"></td>
+                                        <td v-text="breack.start"></td>
+                                        <td v-text="breack.end"></td>
+                                        <td>
+                                            <button class="btn btn-info" data-toggle="modal" data-target="#myModal3" @click="showEditeBeak(breack)" >
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-danger" @click="deleteBreak(breack,index)"   >
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
                     </div>
@@ -106,50 +103,52 @@
                 <div class="col-lg-6">
                     <div class="card m-b-30">
                         <div class="card-body">
-
-                            <h4 class="mt-0 header-title">groupe</h4>
-                            <p class="text-muted m-b-30 font-14">
-                                Use <code>.table-striped</code> to add zebra-striping to any table row
-                                within the <code>&lt;tbody&gt;</code>.
-                            </p>
-
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                                </tbody>
-                            </table>
-
+                            <h4 class="mt-0 header-title">Holidays</h4>
+                            <div class="form-group">
+                                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal2"  @click="showAddHoliday"><i class="fa fa-user-plus"></i> Ajouter Holiday</button>
+                            </div>
+                            <div class="DivWithScroll">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>holiday name</th>
+                                        <th>start </th>
+                                        <th>end</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(holiday,index) in holidays" >
+                                            <th scope="row" v-text="index + 1" ></th>
+                                            <td v-text="holiday.holiday_name"></td>
+                                            <td v-text="holiday.start"></td>
+                                            <td v-text="holiday.end" ></td>
+                                            <td>
+                                                <button class="btn btn-info" data-toggle="modal" data-target="#myModal4" @click="showEditeHoliday(holiday)" >
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-danger" @click="deleteHoliday(holiday,index)" >
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     
 
                 </div> <!-- end col -->
-        </div> <!-- end row -->
+        {% include 'pointage/times/timeEnter/add-time.html'  %}
         {% include 'pointage/times/timeEnter/edit-time.html'  %}
+        {% include 'pointage/times/break/add-break.html'  %}
+        {% include 'pointage/times/break/edit-break.html'  %}
+        {% include 'pointage/times/Holidays/add-holidays.html'  %}
+        {% include 'pointage/times/Holidays/edit-holidays.html'  %}
+
+
     </div>
 </div>
 

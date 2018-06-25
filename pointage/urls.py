@@ -2,11 +2,14 @@ from django.urls import path, include
 from .views import profile, reports,manage
 from . import views
 from rest_framework import routers
-from employees.views import GroupView 
+from employees.views import GroupView
 app_name = 'pointage'
 router = routers.DefaultRouter()
 router.register('times', views.TimeEnterView)
 router.register('groups', GroupView)
+router.register('Breacks', views.BreakView)
+router.register('salaries', views.SalaryView)
+router.register('holidays', views.HolidaysView)
 urlpatterns = [
     path('profile/<int:id>', profile, name="profile"),
     path('', include(router.urls), name="TimeEnter-api"),

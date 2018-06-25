@@ -1,0 +1,37 @@
+<div id="myModal3" class="modal fade bs-example-modal-center1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Modifier un Break</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form   @submit.prevent="EditBreak"  method="post" > {% csrf_token %}
+                <div class="modal-body">
+                        <div class="form-group">
+                            salary*
+                            <select name="salary" class="form-control" v-model="breack.salary">
+                                    <option v-for="(salary, index) in salaries"  v-bind:value="salary.id" v-text="salary.first_name "  >
+                                    </option>
+                            </select>
+                            <p class=" text-danger" v-text="errors.get('salary') "></p>
+                        </div>
+                        <div class="form-group">
+                            start*
+                            <input type="date" name="start" class="form-control" v-model="breack.start" >
+                            <p class=" text-danger" v-text="errors.get('start') "></p>
+                        </div>
+                        <div class="form-group">
+                            end*
+                            <input type="date" name="end" class="form-control" v-model="breack.end" >
+                            <p class=" text-danger" v-text="errors.get('end') "></p>
+                        </div>
+                       
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Modifier</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
