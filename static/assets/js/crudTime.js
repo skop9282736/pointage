@@ -26,7 +26,6 @@ class Errors {
 new Vue({
 	el: '#rootTime',
 	data:{		
-						
             timeEnter:{
 				id:'',
                 group:'',
@@ -111,6 +110,12 @@ new Vue({
 			this.timeEnter.time_out_morning='00:00';
 			this.timeEnter.time_enter_evening='00:00';
 			this.timeEnter.time_out_evening='00:00';
+			this.errors.clear('group') ;
+			this.errors.clear('time_out_morning') ;
+			this.errors.clear('time_enter_morning');
+			this.errors.clear('time_enter_evening');
+			this.errors.clear('time_out_evening');
+			this.errors.clear('full_time');
 		},
 
 		addTimeEnter(event) {
