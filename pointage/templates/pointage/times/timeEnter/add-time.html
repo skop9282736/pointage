@@ -1,51 +1,53 @@
-<div id="myModal" class="modal fade bs-example-modal-center1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Ajouter un Tempe</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<div id="myModal0" class="modal fade bs-example-modal-center1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Ajouter un Tempe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form  @submit.prevent="addTimeEnter"> {% csrf_token %}
+                <div class="modal-body">
+                        <div class="form-group">
+                            Groupe*
+                            <select name="time_group" class="form-control" v-model="timeEnter.group">
+                                    <option v-for="group in groups" v-bind:value="group.id" v-text="group.name"  ></option>
+                            </select>
+                            <p class=" text-danger" v-text="errors.get('group') "></p>
+                        </div>
+                        <div class="form-group">
+                            à plein temps
+                            <select name="full_time" class="form-control" v-model="timeEnter.full_time">
+                                <option v-bind:value="true" >non permanence</option>
+                                <option v-bind:value="false" > permanence</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            l'heure d'entrer 1*
+                            <input type="time" name="time_enter_morning" class="form-control" v-model="timeEnter.time_enter_morning">
+                            <p class=" text-danger" v-text="errors.get('time_enter_morning') "></p>
+                        </div>
+                        <div class="form-group">
+                            l'heure de sortie 1*
+                            <input type="time" name="time_out_morning" class="form-control" v-model="timeEnter.time_out_morning">
+                            <p class=" text-danger" v-text="errors.get('time_out_morning') "></p>
+                        </div>
+                        <div class="form-group" v-if="timeEnter.full_time">
+                            entrer en soirée*
+                            <input type="time" name="time_enter_evening" class="form-control" v-model="timeEnter.time_enter_evening">
+                            <p class=" text-danger" v-text="errors.get('time_enter_evening') "></p>
+                        </div>
+                        <div class="form-group" v-if="timeEnter.full_time">
+                            Sortir en soirée
+                            <input type="time" name="time_out_evening" class="form-control" v-model="timeEnter.time_out_evening">
+                            <p class=" text-danger" v-text="errors.get('time_out_evening') "></p>
+                        </div>
+                        
                 </div>
-                <form  @submit.prevent="addTimeEnter"> {% csrf_token %}
-                    <div class="modal-body">
-                            <div class="form-group">
-                                Groupe*
-                                <select name="time_group" class="form-control" v-model="timeEnter.group">
-                                        <option v-for="group in groups" v-bind:value="group.id" v-text="group.name"  ></option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                entrez le matin*
-                                <input type="datetime" name="time_enter_morning" class="form-control" v-model="timeEnter.time_enter_morning">
-                                <p class=" text-danger" v-text="errors.get('time_enter_morning') "></p>
-                            </div>
-                            <div class="form-group">
-                                Sortir matin*
-                                <input type="datetime" name="time_out_morning" class="form-control" v-model="timeEnter.time_out_morning">
-                                <p class=" text-danger" v-text="errors.get('time_out_morning') "></p>
-                            </div>
-                            <div class="form-group">
-                                entrer en soirée*
-                                <input type="datetime" name="time_enter_evening" class="form-control" v-model="timeEnter.time_enter_evening">
-                                <p class=" text-danger" v-text="errors.get('time_enter_evening') "></p>
-                            </div>
-                            <div class="form-group">
-                                Sortir en soirée
-                                <input type="datetime" name="time_out_evening" class="form-control" v-model="timeEnter.time_out_evening">
-                                <p class=" text-danger" v-text="errors.get('time_out_evening') "></p>
-                            </div>
-                            <div class="form-group">
-                                à plein temps
-                                <select name="full_time" class="form-control" v-model="timeEnter.full_time">
-                                    <option v-bind:value="true" >permanence</option>
-                                    <option v-bind:value="false" >non permanence</option>
-                                </select>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
-                    </div>
-                </form>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

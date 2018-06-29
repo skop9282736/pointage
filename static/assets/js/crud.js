@@ -12,6 +12,10 @@ class Errors {
 	record(errors){
 		this.errors = errors;
 	}
+
+	clear(field){
+		delete this.errors[field]
+	}
 }
 new Vue({
 	el: '#root',
@@ -76,6 +80,11 @@ new Vue({
 		},
 		showAddSalary(){
 			this.salary = {}
+			this.errors.clear("id_salary_finger")
+			this.errors.clear("group_salary")
+			this.errors.clear("first_name")
+			this.errors.clear("last_name")
+			this.errors.clear("date_joined")
 		},
 		getSalaryId(salary){
 			axios.get('/employees/salaries/getid/'+salary.id_salary_finger)
@@ -92,7 +101,8 @@ new Vue({
 				    title: 'Succès!',
 				    content: 'employé édité avec succès!',
 				});
-			  })
+			  }).catch(errors => this.errors.record(errors.response.data))
+			  this.modalShown = false
 		},
 		salaryUrl(id){
 			return  "/pointage/profile/"+id
@@ -120,6 +130,7 @@ new Vue({
 		// ________________________________________________function crud groupe___________________________
 		showAddGroup(){
 			this.groupSalary = {}
+			this.errors.clear("name")
 		},
 		addGroup(event) {
 				axios.post('/employees/groups/', this.$data.groupSalary)
@@ -145,6 +156,7 @@ new Vue({
 			.then(function (response) {
 			    $.alert({title: 'Succès!',content: 'groupe édité avec succès!',});
 			})
+			
 		},
 		deleteGroup(group, index){
 			this.group = group
@@ -166,7 +178,6 @@ new Vue({
 			  }
 			});
 		},
-		// ________________________________________________function crud Time Enter___________________________
 
 	}
 });

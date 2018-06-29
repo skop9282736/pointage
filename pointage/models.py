@@ -14,8 +14,8 @@ class TimeEnter(models.Model):
     group 				= models.OneToOneField(GroupSalaries, on_delete=models.CASCADE)
     time_enter_morning 	= models.TimeField(null=False)
     time_out_morning 	= models.TimeField(null=False)
-    time_enter_evening 	= models.TimeField(null=False)
-    time_out_evening 	= models.TimeField(null=False)
+    time_enter_evening 	= models.TimeField(null=False, blank=True)
+    time_out_evening 	= models.TimeField(null=False, blank=True)
     full_time 			= models.BooleanField(null=False, default=True) # True => only 2
 
     def __str__(self):
@@ -95,7 +95,7 @@ def post_save_break(sender, instance, *arg, **kwarg):
 post_save.connect(post_save_break, sender=Break)
 
 
-def post_save_holiday(sender, instance, *arg, **kwarg):
+def post_save_holiday(sender, instance, **kwarg):
     set_holiday(instance, Summary, Salary)
 
 post_save.connect(post_save_holiday, sender=Holidays)

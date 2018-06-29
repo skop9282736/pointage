@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from employees.models import Salary, GroupSalaries
-from .models import Summary, TimeEnter
+from .models import Summary, TimeEnter, Break , Holidays
 from .pointages import show_pointages
 from django.http import JsonResponse
 from rest_framework import viewsets
-from .serializers import TimeSerializer, GroupSerializer
+from .serializers import TimeSerializer, GroupSerializer, BreakSerializer, SalarySerializer, HolidaysSerializer
 # Create your views here.
 def profile(request, *args, **kwargs):
 	try:
@@ -57,9 +57,21 @@ class TimeEnterView(viewsets.ModelViewSet):
 	queryset = TimeEnter.objects.order_by('-id')
 	serializer_class = TimeSerializer
 
+class BreakView(viewsets.ModelViewSet):
+	queryset = Break.objects.order_by('-id')
+	serializer_class = BreakSerializer
+
 class GroupView(viewsets.ModelViewSet):
 	queryset = GroupSalaries.objects.order_by('-id')
 	serializer_class = GroupSerializer
+
+class SalaryView(viewsets.ModelViewSet):
+	queryset = Salary.objects.order_by('-id')
+	serializer_class = SalarySerializer
+
+class HolidaysView(viewsets.ModelViewSet):
+	queryset = Holidays.objects.order_by('-id')
+	serializer_class = HolidaysSerializer
 
 def get_time_id(request, id):
 	time = TimeEnter.objects.filter(id=id).first()

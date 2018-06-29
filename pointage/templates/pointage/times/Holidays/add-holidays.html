@@ -1,0 +1,36 @@
+<div id="myModal2" class="modal fade bs-example-modal-center1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Ajouter un Holidays</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form   @submit.prevent="addHoliday" @keydown="errors.clear($event.target.holiday_name)"  > {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        Holidays name*
+                        <input type="text" name="name" class="form-control" v-model="holiday.holiday_name" @keydown="errors.clear('holiday_name')" >
+                        <p class=" text-danger" v-text="errors.get('holiday_name') "></p>
+                    </div>
+                        <div class="form-group">
+                            start*
+                            <input type="date" name="start" class="form-control " v-model="holiday.start" @change="errors.clear('start')" >
+
+                            <p class=" text-danger" v-text="errors.get('start') "></p>
+                        </div>
+                        <div class="form-group">
+                            end*
+                            <input type="date" name="end" class="form-control"  v-model="holiday.end" @keydown="errors.clear('end')" >
+                            <p class=" text-danger" v-text="errors.get('end') "></p>
+                        </div>
+                       
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
