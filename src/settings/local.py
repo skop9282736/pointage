@@ -12,7 +12,7 @@ SECRET_KEY = '+k0%a)&ls@f4kc*i%y*_t=j(^5y8q%25eohw=sckwbus=xz9hv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['slimaidar2.pythonanywhere.com']
 
 CSRF_COOKIE_NAME = "XSRF-TOKEN"
 
