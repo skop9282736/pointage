@@ -1,3 +1,6 @@
 {
-    "python.linting.enabled": false
+    "python.linting.enabled": false,
+    "python.pythonPath": "${workspaceFolder}\\pointageEnv\\Scripts\\python.exe",
+    "git.ignoreLimitWarning": true,
+    "python.formatting.provider": "black"
 }

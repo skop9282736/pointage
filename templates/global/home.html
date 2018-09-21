@@ -6,73 +6,55 @@
 <div class="container-fluid">
 	<!-- Page-Title -->
 	<div class="row">
-	    <div class="col-sm-12">
-	        <div class="page-title-box">
-	            <h4 class="page-title">Tableau de bord</h4>
-	        </div>
-	    </div>
+		<div class="col-sm-12">
+			<div class="page-title-box">
+				<h4 class="page-title">Tableau de bord</h4>
+			</div>
+		</div>
 	</div>
 	<!-- end page title end breadcrumb -->
 	<div class="row">
-	    <div class="col-md-6 col-xl-3">
-	        <div class="mini-stat clearfix bg-white">
-	            <span class="mini-stat-icon bg-light"><i class="fa fa-user"></i></span>
-	            <div class="mini-stat-info text-right text-muted">
-	                <span class="counter text-danger">1</span>
-	                Total absences aujourd'hui
-	            </div>
-	        </div>
+		<div class="col-md-6 col-xl-3">
+			<div class="mini-stat clearfix bg-white">
+				<a href="{% url 'employees:manage' %}"><span class="mini-stat-icon bg-light"><i class="fa fa-user"></i></span></a>
+				<div class="mini-stat-info text-right text-muted">
+					<span class="counter text-danger">{{nb_salary}}</span>
+					Salariés
+				</div>
+			</div>
 		</div>
-		
-	    <div class="col-md-6 col-xl-3">
-	        <div class="mini-stat clearfix bg-success">
-	            <span class="mini-stat-icon bg-light"><i class="fa fa-cloud"></i></span>
-	            <div class="mini-stat-info text-right text-white">
-	                la météo aujourd'hui
-	            </div>
-	            <p class="mb-0 m-t-20 text-light">29 deg <span class="pull-right"><i class="fa fa-caret-up m-r-5"></i>Marrakech</span></p>
-	        </div>
+
+		<div class="col-md-6 col-xl-3">
+			<div class="mini-stat clearfix bg-success">
+				<a href="{% url 'pointage:reports' %}"><span class="mini-stat-icon bg-light"><i class="fa fa-cloud"></i></span></a>
+				<div class="mini-stat-info text-right text-white">
+					Rapport
+				</div>
+				<p class="mb-0 m-t-20 text-light"> <span class="pull-right"><a href="">Plus de details</a></span></p>
+			</div>
 		</div>
-		
-	    <div class="col-md-6 col-xl-3">
-	        <div class="mini-stat clearfix bg-white">
-	            <span class="mini-stat-icon bg-light"><i class="mdi mdi-cube-outline text-warning"></i></span>
-	            <div class="mini-stat-info text-right text-muted">
-	                <span class="counter text-warning">52</span>
-	                Total des employés 
-	            </div>
-	        </div>
+
+		<div class="col-md-6 col-xl-3">
+			<div class="mini-stat clearfix bg-white">
+				<a href="{% url 'pointage:gererTempe' %}"><span class="mini-stat-icon bg-light"><i class="mdi mdi-cube-outline text-warning"></i></span></a>
+				<div class="mini-stat-info text-right text-muted">
+					<a href="{% url 'pointage:gererTempe' %}">Gere les périodes</a>
+				</div>
+			</div>
 		</div>
-		
-	    <div class="col-md-6 col-xl-3">
-	        <div class="mini-stat clearfix bg-info">
-	            <span class="mini-stat-icon bg-light"><i class="fa fa-users"></i></span>
-	            <div class="mini-stat-info text-right text-light">
-	                <span class="counter text-white">2</span>
-	                Total groups
-	            </div>
-	        </div>
+
+		<div class="col-md-6 col-xl-3">
+			<div class="mini-stat clearfix bg-info">
+				<a href="{% url 'employees:manage' %}"><span class="mini-stat-icon bg-light"><i class="fa fa-users"></i></span></a>
+				<div class="mini-stat-info text-right text-light">
+					<span class="counter text-white">{{nb_group}}</span>
+					Total groups
+				</div>
+			</div>
 		</div>
-		
+
 	</div>
 
-	<div class="row">
-	    <div class="col-md-6">
-	        <div class="card m-b-30">
-	            <div class="card-body">
-	                
-	            </div>
-	        </div>
-	    </div>
-
-	    <div class="col-md-6">
-	        <div class="card m-b-30">
-	            <div class="card-body">
-	               
-	            </div>
-	        </div>
-	    </div>
-	</div>
 
 </div> <!-- end container -->
 {% endblock %}

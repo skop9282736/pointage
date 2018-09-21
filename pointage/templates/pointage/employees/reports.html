@@ -18,6 +18,12 @@
     </div>
 {% endif %}
 
+<style media="screen">
+@media only screen and (max-width: 479px) {
+ .mobile-hide{ display: none !important; }
+}
+</style>
+
 <div class="row justify-content-center">
    <div class="col-lg-9 col-md-12 col-xs-12 col-sm-12">
         <div class="card">
@@ -37,7 +43,7 @@
                         <button class="btn btn-primary btn-block">Afficher les enregistrements</button>
                     </div>
                 </form>
-                <div class="d-flex  justify-content-around status-parent">
+                <div class="d-flex  justify-content-around status-parent mobile-hide">
                     <div class="">
                         <div class="status absent"></div> <span>Absent</span>
                     </div>
@@ -136,4 +142,15 @@
         </div>
     </div>
 </div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script>
+  $(function() {
+    $('#print').click(function(){
+      $('#table-report').printThis();
+    });
+  });
+</script>
 {% endblock content %}
