@@ -14,9 +14,11 @@ from .serializers import (
 )
 from employees.models import GroupSalaries, Salary
 from genericpath import exists
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required(login_url='/admin/login/')
 def profile(request, *args, **kwargs):
     clone_atd()
     try:
@@ -43,7 +45,7 @@ def profile(request, *args, **kwargs):
     context = {"salary": salary, "dates": new_list, "legal_time": legal_time}
     return render(request, "pointage/employees/profile.html", context)
 
-
+@login_required(login_url='/admin/login/')
 def reports(request):
     clone_atd()
     try:
@@ -75,7 +77,7 @@ def reports(request):
     context = {"dates": new_list}
     return render(request, "pointage/employees/reports.html", context)
 
-
+@login_required(login_url='/admin/login/')
 def manage(request):
     groups = GroupSalaries.objects.order_by("-id")
     return render(request, "pointage/times/manage.html", {"groups": groups})

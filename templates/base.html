@@ -1,91 +1,105 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>{% block title %}{% endblock %}</title>
-    <meta content="Admin Dashboard" name="description" />
-    <meta content="Themesdesign" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <title>{% block title %}{% endblock %}</title>
+  <meta content="Admin Dashboard" name="description" />
+  <meta content="Themesdesign" name="author" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- App Icons -->
-    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+  <!-- App Icons -->
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
 
-    <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="{% static 'assets/plugins/morris/morris.css' %}">
+  <!--Morris Chart CSS -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/morris/morris.css' %}">
 
-    <!-- App css -->
-    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}">
+  <!-- App css -->
+  <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}">
 </head>
+
 <body>
-    <!-- Loader -->
-    <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
-
-    <!-- Navigation Bar-->
-    <header id="topnav">
-
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
-          <a class="navbar-brand" href="#">Pointage 3SIM</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/"><i class="ti-home"></i> Accueil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'employees:manage' %}"><i class="ti-user"></i> Employés</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'pointage:reports' %}"><i class="ti-time"></i> Rapport</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="ti-book"></i> Présence
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'pointage:gererTempe' %}"><i class="ti-book"></i> Gérer les Temps</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-
-    </header>
-    <!-- End Navigation Bar-->
-
-    <div class="wrapper">
-        <div class="container-fluid">
-            {% block content %} {% endblock %}
-        </div>
+  <!-- Loader -->
+  <div id="preloader">
+    <div id="status">
+      <div class="spinner"></div>
     </div>
-    <!-- end wrapper -->
+  </div>
+
+  <!-- Navigation Bar-->
+  <header id="topnav">
 
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    © 2018 Pointage - Crafted with <i class="mdi mdi-heart text-danger"></i> by I.A.
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Pointage 3SIM</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/"><i class="ti-home"></i> Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'employees:manage' %}"><i class="ti-user"></i> Employés</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'pointage:reports' %}"><i class="ti-time"></i> Rapport</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="ti-book"></i> Présence
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'pointage:gererTempe' %}"><i class="ti-book"></i> Gérer les Temps</a>
             </div>
+
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}"><i class="ti-power-off"></i> LOGOUT</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  </header>
+  <!-- End Navigation Bar-->
+
+  <div class="wrapper">
+    <div class="container-fluid">
+      {% block content %} {% endblock %}
+    </div>
+  </div>
+  <!-- end wrapper -->
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          © 2018 Pointage - Crafted with <i class="mdi mdi-heart text-danger"></i> by I.A.
         </div>
-    </footer>
-    <!-- End Footer -->
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
 
 
-    {% include 'snippets/scripts.html' %}
-    {% block script %} {% endblock %}
+  {% include 'snippets/scripts.html' %}
+  {% block script %} {% endblock %}
 </body>
 
 </html>
